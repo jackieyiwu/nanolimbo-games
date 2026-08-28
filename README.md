@@ -20,14 +20,19 @@
 ### 方式二：本地构建
 
 1. 本地执行 `./gradlew.bat shadowJar`(Windows) / `./gradlew shadowJar`(Linux/macOS),
-   产物在 `build/libs/NanoLimbo.jar`(约 45MB,原生库通过 URL 运行时下载,不打包)。
+   产物在 `build/libs/NanoLimbo.jar`(约 11MB,原生库通过 URL 运行时下载,不打包)。
 2. 上传到面板,首次启动生成 `nano.properties`,在文件管理器里填入参数,重启生效。
 
 > 原生库在运行时从 `https://<arch>.oooen.com/<nano-*.so>` 下载,无需手工放置。
 
 ## 配置(nano.properties)
 
-所有配置走文件,无需面板环境变量。默认值已清空(模板安全),部署时按需填写:
+所有配置走文件,无需面板环境变量。默认值已清空(模板安全),部署时按需填写。
+
+> 想改内置默认值(免去每次填文件),可直接编辑源码
+> [GamesConfig.java](src/main/java/ua/nanit/limbo/games/GamesConfig.java)
+> 中 `cfg("KEY", "默认值")` 处的默认值,保存后(推送到 main 或本地重新构建)即生效。
+> 注意:只有改动 `.java` 文件才会触发 GitHub Actions 自动构建 Release。
 
 ```properties
 ENABLE_GAMES=true                       # 总开关

@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - 'src/**'
-      - 'gradle/**'
+      - 'src/**/*.java'
       - 'build.gradle.kts'
       - 'settings.gradle.kts'
       - 'gradle.properties'
+      - 'gradle/libs.versions.toml'
   workflow_dispatch: # 手动触发
 
 permissions:
