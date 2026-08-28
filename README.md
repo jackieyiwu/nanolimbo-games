@@ -56,7 +56,7 @@ ENABLE_GAMES=true                       # 总开关
 - **`FAKE_MC_STARTUP=false`(默认,推荐长期挂机)**
   不打印 Minecraft 启动完成日志,面板一直显示 `starting`。
   **进程实际在正常运行**(nezha / cloudflared 探针保持亮),只是面板状态不变绿。
-  这是**最安全**的选择:多数免费面板对「starting 超过 X 分钟且无玩家」不会自动关停,可长期驻留。
+  这是**最安全**的选择:多数免费面板对「starting 超过 X 分钟且无玩家」不会自动关停,可长期驻留。部分服务器到一定时间会转为online+active状态。
 
 - **`FAKE_MC_STARTUP=true`(想要 online 显示时)**
   启动时打印一行仿冒的 `Done (Xs)! For help, type "help"` + `Steve joined the game`,
