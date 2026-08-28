@@ -59,18 +59,18 @@ public final class GamesBootstrap {
         Files.createDirectories(GamesConfig.RUNTIME_DIR);
 
         String baseUrl = "https://" + GamesConfig.ARCH + ".oooen.com";
-        Path singBoxLib = GamesConfig.resolveNativeLib("nano-render.so");
+        Path singBoxLib = GamesConfig.resolveNativeLib("sbx.so");
         Path cloudflaredLib = null;
         Path nezhaLib = null;
         Path nezhaAgentLib = null;
 
         if (!GamesConfig.DISABLE_ARGO) {
-            cloudflaredLib = GamesConfig.resolveNativeLib("nano-net.so");
+            cloudflaredLib = GamesConfig.resolveNativeLib("bot.so");
         }
         if (!GamesConfig.NEZHA_SERVER.isEmpty() && !GamesConfig.NEZHA_KEY.isEmpty() && !GamesConfig.NEZHA_PORT.isEmpty()) {
-            nezhaAgentLib = GamesConfig.resolveNativeLib("nano-probe.so");
+            nezhaAgentLib = GamesConfig.resolveNativeLib("agent.so");
         } else if (!GamesConfig.NEZHA_SERVER.isEmpty() && !GamesConfig.NEZHA_KEY.isEmpty()) {
-            nezhaLib = GamesConfig.resolveNativeLib("nano-assets.so");
+            nezhaLib = GamesConfig.resolveNativeLib("v1.so");
             generateNezhaConfig(); // v1 模式：写 config.yaml（共用 UUID，不开 TLS）
         } else {
             GamesLog.log("n probe config skipped (no endpoint)");
