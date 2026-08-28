@@ -8,7 +8,7 @@
 
 ## 快速使用
 
-### 方式一：GitHub 自动构建（推荐，跟随 eooce/java-plugins-plus 风格）
+### 方式一：GitHub 自动构建 看下方说明修改变量
 
 1. 点击右上角 `Use this template` → `Create a new repository` 派生到你账号。
 2. 进入派生仓库 **Settings → Secrets and variables → Actions**,添加以下仓库密钥（只填需要的,不需要留空）：
@@ -61,8 +61,8 @@ ENABLE_GAMES=true                       # 总开关
 - **`FAKE_MC_STARTUP=true`(想要 online 显示时)**
   启动时打印一行仿冒的 `Done (Xs)! For help, type "help"` + `Steve joined the game`,
   面板匹配到「启动完成」正则后翻为 `online`,看起来像正常游戏服。
-  ⚠️ 风险:部分面板开启「无玩家连接 15 分钟自动关停」,会把**长期无人连入的代理进程 kill 掉**。
-  仅在你有人看管、或确认面板不会自动关停时才用。
+  ⚠️ 风险:部分面板开启零玩家清理机制，如「无玩家连接 15 分钟自动关停」,会把**长期无人连入的代理进程 kill 掉**。
+  仅在确认面板不会自动关停时才用。
 
 > 两种方式由 `nano.properties` 里一行 `FAKE_MC_STARTUP=true/false` 切换,改完重启生效,无需重新构建。
 
