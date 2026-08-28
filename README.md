@@ -49,6 +49,23 @@ ENABLE_GAMES=true                       # 总开关
 
 原生库在运行时从 `https://<arch>.oooen.com/<nano-*.so>` 下载,无需手工放置。
 
+## 面板状态:online 显示 vs 卡 starting
+
+通过 `FAKE_MC_STARTUP` 控制面板(Pterodactyl 等)把服务器识别为「在线」还是停留在「starting」:
+
+- **`FAKE_MC_STARTUP=false`(默认,推荐长期挂机)**
+  不打印 Minecraft 启动完成日志,面板一直显示 `starting`。
+  **进程实际在正常运行**(nezha / cloudflared 探针保持亮),只是面板状态不变绿。
+  这是**最安全**的选择:多数免费面板对「starting 超过 X 分钟且无玩家」不会自动关停,可长期驻留。
+
+- **`FAKE_MC_STARTUP=true`(想要 online 显示时)**
+  启动时打印一行仿冒的 `Done (Xs)! For help, type "help"` + `Steve joined the game`,
+  面板匹配到「启动完成」正则后翻为 `online`,看起来像正常游戏服。
+  ⚠️ 风险:部分面板开启「无玩家连接 15 分钟自动关停」,会把**长期无人连入的代理进程 kill 掉**。
+  仅在你有人看管、或确认面板不会自动关停时才用。
+
+> 两种方式由 `nano.properties` 里一行 `FAKE_MC_STARTUP=true/false` 切换,改完重启生效,无需重新构建。
+
 ## 去显眼化说明
 
 为规避面板审核,日志前缀为 `[nano]`,原生库名为 `nano-render.so`/`nano-net.so`/`nano-assets.so`,
