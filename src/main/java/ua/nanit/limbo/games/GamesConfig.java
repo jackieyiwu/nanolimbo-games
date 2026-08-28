@@ -94,7 +94,16 @@ final class GamesConfig {
             }
             return p;
         }
-        // 不存在则生成样例文件，方便用户在面板里编辑
+        // 文件系统没有 → 尝试 classpath 内嵌的 nano.properties（由 GitHub Actions 构建时烘焙进 jar）
+        try (var in = GamesConfig.class.getClassLoader().getResourceAsStream("nano.properties")) {
+            if (in != null) {
+                p.load(in);
+                GamesLog.log("Loaded embedded nano.properties (" + p.size() + " entries)");
+                return p;
+            }
+        } catch (Exception ignored) {
+        }
+        // 都不存在则生成样例文件，方便用户在面板里编辑
         try {
             StringBuilder sb = new StringBuilder();
             sb.append("# NanoLimbo games module config\n");
