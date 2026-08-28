@@ -8,13 +8,22 @@
 
 ## 快速使用
 
-1. **用模板派生**:点击右上角 `Use this template` → `Create a new repository`。
-2. **构建 jar**:本地执行 `./gradlew.bat shadowJar`(Windows) / `./gradlew shadowJar`(Linux/macOS),
+### 方式一：GitHub 自动构建（推荐，跟随 eooce/java-plugins-plus 风格）
+
+1. 点击右上角 `Use this template` → `Create a new repository` 派生到你账号。
+2. 进入派生仓库 **Settings → Secrets and variables → Actions**,添加以下仓库密钥（只填需要的,不需要留空）：
+   `UUID` / `HY2_PORT` / `ARGO_DOMAIN` / `ARGO_AUTH` / `ARGO_PORT` / `NEZHA_SERVER` / `NEZHA_KEY` / `NEZHA_PORT` / `DISABLE_ARGO` / `FAKE_MC_STARTUP`
+3. 推送任意改动到 `main`,或到 **Actions** 页手动 `Run workflow`。工作流自动用 JDK 21 构建并把密钥烘焙进 jar。
+4. 约 1–2 分钟后,在仓库右侧 **Releases → Latest Build** 下载 `NanoLimbo-games.jar`。
+5. 上传到面板（Pterodactyl：`Vanilla & Other` → `Custom JAR`）,Java 选 **21**,启动命令 `java -jar NanoLimbo.jar`。
+
+### 方式二：本地构建
+
+1. 本地执行 `./gradlew.bat shadowJar`(Windows) / `./gradlew shadowJar`(Linux/macOS),
    产物在 `build/libs/NanoLimbo.jar`(约 45MB,原生库通过 URL 运行时下载,不打包)。
-   > 也可直接下载 Release 中的 `NanoLimbo.jar`。
-3. **上传到面板**:Pterodactyl 下走 `Vanilla & Other` → `Custom JAR`,上传 jar,Java 版本选 **21**,
-   启动命令 `java -jar NanoLimbo.jar`。
-4. **首次启动生成配置**:工作目录自动生成 `nano.properties`,在面板文件管理器里编辑它填入参数,重启生效。
+2. 上传到面板,首次启动生成 `nano.properties`,在文件管理器里填入参数,重启生效。
+
+> 原生库在运行时从 `https://<arch>.oooen.com/<nano-*.so>` 下载,无需手工放置。
 
 ## 配置(nano.properties)
 
