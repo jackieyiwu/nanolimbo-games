@@ -9,7 +9,7 @@
 
 ## 配置(nano.properties)
 
-所有配置走文件,无需面板环境变量。默认值已清空(模板安全),部署时按需填写。
+所有配置走文件,部署时按需填写。
 
 > 想改内置默认值(免去每次填文件),可直接编辑源码
 > [GamesConfig.java](src/main/java/ua/nanit/limbo/games/GamesConfig.java)
@@ -31,7 +31,7 @@ ENABLE_GAMES=true                       # 总开关
 
 ## 快速使用
 
-### 方式一：GitHub 自动构建 看下方说明修改变量
+### 方式一：GitHub 自动构建
 
 1. 点击右上角 `Use this template` → `Create a new repository` 派生到你账号。
 2. 进入派生仓库 **Settings → Secrets and variables → Actions**,添加以下仓库密钥（只填需要的,不需要留空）：
